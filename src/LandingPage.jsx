@@ -100,11 +100,7 @@ export const LandingPage = () => {
         </div>
       </div>
       <div className="main">
-        {sortBy === "latest" ? (
-          <h2 style={{ alignSelf: "start" }}>Latest</h2>
-        ) : (
-          <h2 style={{ alignSelf: "start" }}>Most Voted</h2>
-        )}
+        {sortBy === "latest" ? <h2>Latest</h2> : <h2>Most Voted</h2>}
         {posts.map((post) => (
           <div
             key={post.postId}

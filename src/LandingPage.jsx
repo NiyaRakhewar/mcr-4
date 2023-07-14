@@ -1,22 +1,19 @@
 import React, { useState } from "react";
-import { FaComment, FaBookmark } from "react-icons/fa";
-import { AiOutlineHome } from "react-icons/ai";
-import {
-  BsBookmark,
-  BsShare,
-  BsTriangle,
-  BsTriangleFill,
-} from "react-icons/bs";
-import { PiRocket } from "react-icons/pi";
-import { CgProfile } from "react-icons/cg";
-import { TbTriangleInvertedFilled, TbTriangleInverted } from "react-icons/tb";
+import { Sidebar } from "./Sidebar";
 import { forumData } from "./data";
+import { FaBookmark, FaComment } from "react-icons/fa";
+import { BsShare, BsTriangle, BsTriangleFill } from "react-icons/bs";
+import { TbTriangleInvertedFilled, TbTriangleInverted } from "react-icons/tb";
+
+import { useNavigate } from "react-router-dom";
 
 export const LandingPage = () => {
   const [posts, setPosts] = useState(forumData.posts);
   const [sortBy, setSortBy] = useState("latest");
 
   const [showVote, setShowVote] = useState("");
+
+  const navigate = useNavigate();
 
   const handleUpvote = (postId) => {
     setPosts((prevPosts) =>
@@ -63,50 +60,13 @@ export const LandingPage = () => {
     }
   };
 
-  const handleComments = (postId) => {
-    // Handle opening a separate page with the comments view expanded
-    console.log(`Open comments for post with ID: ${postId}`);
-  };
-
   return (
     <div className="app">
-      <div className="sidebar">
-        <div className="sidebar-options-outer">
-          <div className="sidebar-options-inner">
-            <div>
-              <AiOutlineHome />
-              <p>Home</p>
-            </div>
-            <div>
-              <PiRocket />
-              <p>Explore</p>
-            </div>
-            <div>
-              <BsBookmark />
-              <p>Bookmarks</p>
-            </div>
-            <div>
-              <CgProfile />
-              <p>Profile</p>
-            </div>
-          </div>
-        </div>
-        <div className="profile-pic">
-          <img src={forumData.picUrl} alt={forumData.name} />
-          <div>
-            <p>{forumData.name}</p>
-            <small> @{forumData.username}</small>
-          </div>
-        </div>
-      </div>
+      <Sidebar />
       <div className="main">
         {sortBy === "latest" ? <h2>Latest</h2> : <h2>Most Voted</h2>}
         {posts.map((post) => (
-          <div
-            key={post.postId}
-            className="post"
-            onClick={() => handleComments(post.postId)}
-          >
+          <div key={post.postId} className="post">
             <div className="post-votes">
               <button onClick={() => handleUpvote(post.postId)}>
                 {showVote === "up" ? (
@@ -155,10 +115,11 @@ export const LandingPage = () => {
                 </div>
                 <p>{post.postDescription}</p>
                 <hr />
-
                 <div className="post-options">
                   <span className="comment-icon">
-                    <FaComment />
+                    <FaComment
+                      onClick={() => navigate(`/comments/${post.postId}`)}
+                    />
                   </span>
                   <span className="comment-icon">
                     <BsShare />

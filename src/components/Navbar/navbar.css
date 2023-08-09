@@ -1,0 +1,30 @@
+.navbar {
+  background-color: var(--forum-theme-nav-background-color);
+  height: 80px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 1.2rem;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.navbar-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: inherit;
+  padding: 0px 20px;
+  max-width: 1500px;
+}
+
+.navbar-container-logo {
+  color: var(--forum-theme-main-color);
+  cursor: pointer;
+  align-items: center;
+  text-decoration: none;
+  font-size: 2rem;
+  flex-grow: 1;
+  padding-left: 80px;
+}

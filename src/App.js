@@ -1,18 +1,24 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import { LandingPage } from "./LandingPage";
-import { Header } from "./Header";
-import { Comment } from "./Comment";
+
+import { SinglePage } from "./components/pages/SinglePage";
+import { Navbar } from "./components/Navbar/Navbar";
+import { NavbarMenu } from "./components/NavbarMenu/NavbarMenu";
+import { SortMenu } from "./components/SortMenu/SortMenu";
+import { Home } from "./components/pages/Home/Home";
 
 function App() {
   return (
     <div className="App">
-      <Header />
-      <hr />
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/comments/:id" element={<Comment />} />
-      </Routes>
+      <Navbar />
+      <div className="App-main-page-content">
+        <NavbarMenu />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/single-post/:id" element={<SinglePage />} />
+        </Routes>
+        <SortMenu />
+      </div>
     </div>
   );
 }
